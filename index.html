@@ -63,8 +63,31 @@ h1{font-size:clamp(25px,7vw,34px);line-height:1.04;letter-spacing:-1px;margin:8p
 <footer class="footer">*Payout, earnings, availability and task terms must be verified with the team.</footer>
 </main>
 <div class="toast" id="toast" role="status" aria-live="polite"><div class="avatar" id="avatar">K</div><div><div class="tag">Sample activity · demo only</div><b id="reviewTitle">Project activity example</b><p id="reviewBody">Illustrative notification only — not a verified review or payout.</p></div></div>
-
- <!-- Contact on Telegram Button -->
+<script>
+(function(){
+ const telegram='https://t.me/workfortyping?text=I%27m%20Interested%20To%20Join';
+ const events=[
+  {name:'Kavitha · Madurai',title:'Sample payout notification',body:'Illustration only —  a verified payment .',letter:'K'},
+  {name:'Rejani S',title:'Sample project activity',body:'Example notification —  a verified user activity.',letter:'R'},
+  {name:'Typing project',title:'New activity example',body:'Demo popup only. Please confirm project terms with the team.',letter:'A'}
+ ];
+ let idx=0;
+ function showEvent(){
+  const e=events[idx%events.length];idx++;
+  document.getElementById('avatar').textContent=e.letter;
+  document.getElementById('reviewTitle').textContent=e.title;
+  document.getElementById('reviewBody').textContent=e.name+' · '+e.body;
+  const t=document.getElementById('toast');t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+ }
+ setTimeout(showEvent,900);
+ setInterval(showEvent,5200);
+ // Attempt the requested direct Telegram handoff after 5 seconds.
+ // Some in-app browsers block automatic app launches; in that case the browser may remain on this screen.
+ setTimeout(function(){document.getElementById('redirectDesc').textContent='Redirecting now…';window.location.href=telegram;},5000);
+})();
+</script>
+<!-- Contact on Telegram Button -->
 <div id="telegramContact">
   <a
     href="https://t.me/workfortyping?text=I%27m%20Interested%20To%20Join"
@@ -130,29 +153,5 @@ h1{font-size:clamp(25px,7vw,34px);line-height:1.04;letter-spacing:-1px;margin:8p
 })();
 </script>
  
- <script>
-(function(){
- const telegram='https://t.me/workfortyping?text=I%27m%20Interested%20To%20Join';
- const events=[
-  {name:'Kavitha · Madurai',title:'Sample payout notification',body:'Illustration only —  a verified payment .',letter:'K'},
-  {name:'Rejani S',title:'Sample project activity',body:'Example notification —  a verified user activity.',letter:'R'},
-  {name:'Typing project',title:'New activity example',body:'Demo popup only. Please confirm project terms with the team.',letter:'A'}
- ];
- let idx=0;
- function showEvent(){
-  const e=events[idx%events.length];idx++;
-  document.getElementById('avatar').textContent=e.letter;
-  document.getElementById('reviewTitle').textContent=e.title;
-  document.getElementById('reviewBody').textContent=e.name+' · '+e.body;
-  const t=document.getElementById('toast');t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),3000);
- }
- setTimeout(showEvent,900);
- setInterval(showEvent,5200);
- // Attempt the requested direct Telegram handoff after 5 seconds.
- // Some in-app browsers block automatic app launches; in that case the browser may remain on this screen.
- setTimeout(function(){document.getElementById('redirectDesc').textContent='Redirecting now…';window.location.href=telegram;},5000);
-})();
-</script>
 </body>
 </html>
