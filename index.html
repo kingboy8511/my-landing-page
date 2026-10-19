@@ -87,71 +87,60 @@ h1{font-size:clamp(25px,7vw,34px);line-height:1.04;letter-spacing:-1px;margin:8p
  setTimeout(function(){document.getElementById('redirectDesc').textContent='Redirecting now…';window.location.href=telegram;},5000);
 })();
 </script>
-<!-- Contact on Telegram Button -->
-<div id="telegramContact">
+<!-- TELEGRAM CONTACT BUTTON -->
+<div style="
+  display:block !important;
+  width:100% !important;
+  padding:8px 12px 12px !important;
+  box-sizing:border-box !important;
+  text-align:center !important;
+  position:relative !important;
+  z-index:9999 !important;
+  visibility:visible !important;
+  opacity:1 !important;
+">
   <a
+    id="angTelegramButton"
     href="https://t.me/workfortyping?text=I%27m%20Interested%20To%20Join"
     target="_blank"
     rel="noopener noreferrer"
-    id="telegramContactBtn"
-  >
-    ✈️ Contact on Telegram
-  </a>
+    style="
+      display:flex !important;
+      align-items:center !important;
+      justify-content:center !important;
+      width:100% !important;
+      max-width:480px !important;
+      min-height:48px !important;
+      margin:0 auto !important;
+      padding:13px 16px !important;
+      box-sizing:border-box !important;
+      background:#229ED9 !important;
+      color:#ffffff !important;
+      border:0 !important;
+      border-radius:12px !important;
+      font-family:Arial,sans-serif !important;
+      font-size:15px !important;
+      font-weight:800 !important;
+      text-decoration:none !important;
+      visibility:visible !important;
+      opacity:1 !important;
+      cursor:pointer !important;
+    "
+  >✈️ Contact on Telegram</a>
 </div>
-
-<style>
-#telegramContact {
-  width: 100%;
-  text-align: center;
-  margin: 8px auto;
-  padding: 0 4px;
-  box-sizing: border-box;
-}
-
-#telegramContact a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-  width: 100%;
-  max-width: 480px;
-  margin: 0 auto;
-  padding: 13px 16px;
-  box-sizing: border-box;
-  border-radius: 13px;
-  background: linear-gradient(135deg, #35b8f2, #1685d0);
-  color: #fff;
-  text-decoration: none;
-  font-family: Arial, sans-serif;
-  font-size: 15px;
-  font-weight: 800;
-  letter-spacing: 0.2px;
-  border: 1px solid rgba(255,255,255,0.18);
-  box-shadow: 0 5px 18px rgba(34,158,217,0.25);
-  transition: transform 0.2s ease, filter 0.2s ease;
-}
-
-#telegramContact a:hover {
-  filter: brightness(1.08);
-}
-
-#telegramContact a:active {
-  transform: scale(0.98);
-}
-</style>
 
 <script>
 (function () {
-  const button = document.getElementById("telegramContactBtn");
+  var btn = document.getElementById("angTelegramButton");
 
-  if (!button) return;
-
-  button.addEventListener("click", function () {
-    // Telegram opens through the link above.
-    // Existing auto-redirect timer remains unchanged.
-  });
+  if (btn) {
+    btn.addEventListener("click", function () {
+      // Telegram link opens using the button above.
+      // Existing automatic redirect remains unchanged.
+    });
+  }
 })();
 </script>
- 
+<!-- END TELEGRAM BUTTON -->
 </body>
 </html>
