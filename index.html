@@ -114,20 +114,21 @@ h1{
 .demoText b{font-size:12px;display:block;margin-bottom:3px;color:#fff}
 .demoText p{font-size:9.5px;line-height:1.35;color:var(--muted);margin:0}
 
-/* Redirect Status */
+/* Redirect Status & Live Timer */
 .redirect{border-radius:11px;background:#132b49;border:1px solid #2a4d73;padding:8px 11px;display:flex;align-items:center;gap:9px}
 .spinner{width:19px;height:19px;border:2px solid #355777;border-top-color:var(--cyan);border-radius:50%;animation:spin .8s linear infinite;flex:0 0 auto}
-.redirect b{display:block;font-size:11.5px}
+.redirect b{display:block;font-size:11.5px;color:#fff}
+.redirect b span.timer-badge{color:var(--cyan);font-weight:900}
 .redirect small{display:block;color:#b5c6de;font-size:9.5px;margin-top:1px}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 .footer{font-size:8.5px;line-height:1.3;color:#8193ad;text-align:center;margin-top:auto;padding:0 2px}
 
-/* Review Toast Popup (Positioned so it NEVER blocks the button) */
+/* Review Toast Popup (Button ko block nahi karega) */
 .toast{
   position:fixed;
   left:50%;
-  bottom:130px; /* Telegram button se upar rahega taki overlap na ho */
+  bottom:130px;
   transform:translate(-50%,20px);
   width:min(calc(100% - 24px),390px);
   z-index:999999;
@@ -158,18 +159,18 @@ h1{
 <section class="hero">
 <div class="kicker">Mobile-based opportunity</div>
 
-<!-- Title in One Highlighted Line -->
+<!-- 1 Line Title -->
 <h1>Online Typing &amp; Captcha Work</h1>
 
 <p class="sub">A simple mobile-based project. Connect with the team on Telegram for current work details.</p>
 
-<!-- Highlighted Government ID / PAN Card Line -->
+<!-- PAN Card Alert -->
 <div class="id-alert">
   <span>🪪</span>
   <span><strong>Mandatory:</strong> Must Have Gov ID (PAN Card)</span>
 </div>
 
-<!-- Company Name in Single Line -->
+<!-- 1 Line Company -->
 <div class="company-single">
   <span>Registered Partner:</span> <strong>ANGMIRAEUP</strong>
 </div>
@@ -182,7 +183,7 @@ h1{
 <div class="metric"><span class="ico">🛡️</span><b>No Investment*</b><small>Never pay joining fee</small></div>
 </section>
 
-<!-- Live Captcha Work Demo (Sharp & Always Visible) -->
+<!-- Live Captcha Work Demo -->
 <section class="demoWrap">
   <div class="captcha-box">
     <div style="font-size:8px; color:#8ab4f8; font-weight:800; letter-spacing:0.5px;">TASK PREVIEW:</div>
@@ -198,9 +199,13 @@ h1{
   </div>
 </section>
 
+<!-- Live Redirect Timer Section -->
 <section class="redirect">
   <div class="spinner"></div>
-  <div><b id="redirectTitle">Opening Telegram…</b><small id="redirectDesc">Preparing your “I'm Interested To Join” message</small></div>
+  <div>
+    <b id="redirectTitle">Opening Telegram in <span class="timer-badge" id="countdownTimer">5</span>s…</b>
+    <small id="redirectDesc">Preparing your “I'm Interested To Join” message</small>
+  </div>
 </section>
 
 <!-- Telegram Button -->
@@ -215,7 +220,7 @@ h1{
 <footer class="footer">*Payout, earnings, availability and task terms must be verified with the team.</footer>
 </main>
 
-<!-- TAMIL NADU & KERALA USER POPUP (Button ko block nahi karega) -->
+<!-- TAMIL NADU & KERALA USER POPUP -->
 <div class="toast" id="toast" role="status" aria-live="polite">
   <div class="avatar" id="avatar">K</div>
   <div>
@@ -227,8 +232,35 @@ h1{
 
 <script>
 (function(){
- const telegram='https://t.me/workfortyping?text=I%27m%20Interested%20To%20Join';
+ const telegram = 'https://t.me/workfortyping?text=I%27m%20Interested%20To%20Join';
 
+ // ============================================================
+ // ⏱️ TIMER SETTING: YAHAN SE SECONDS CHANGE KAREIN (e.g. 3, 4 ya 5)
+ // ============================================================
+ const REDIRECT_DELAY = 5; // <--- Is 5 ko 3 ya 4 apne hisab se badal lijiye
+ // ============================================================
+
+ // Live Countdown Logic
+ let timeLeft = REDIRECT_DELAY;
+ const timerEl = document.getElementById('countdownTimer');
+ const titleEl = document.getElementById('redirectTitle');
+ const descEl = document.getElementById('redirectDesc');
+
+ if (timerEl) timerEl.textContent = timeLeft;
+
+ const countdown = setInterval(function(){
+   timeLeft--;
+   if (timeLeft > 0) {
+     if (timerEl) timerEl.textContent = timeLeft;
+   } else {
+     clearInterval(countdown);
+     if (titleEl) titleEl.textContent = 'Opening Telegram…';
+     if (descEl) descEl.textContent = 'Redirecting now…';
+     window.location.href = telegram;
+   }
+ }, 1000);
+
+ // Tamil Nadu & Kerala Members
  const members = [
   { name: 'Kavitha S', city: 'Madurai, Tamil Nadu', letter: 'K' },
   { name: 'Anjali Nair', city: 'Kochi, Kerala', letter: 'A' },
@@ -254,16 +286,11 @@ h1{
   
   const t = document.getElementById('toast');
   t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
+  setTimeout(() => t.classList.remove('show'), 2800);
  }
 
- setTimeout(showEvent, 1000);
- setInterval(showEvent, 5200);
-
- setTimeout(function(){
-  document.getElementById('redirectDesc').textContent = 'Redirecting now…';
-  window.location.href = telegram;
- }, 5000);
+ setTimeout(showEvent, 800);
+ setInterval(showEvent, 4800);
 })();
 </script>
 
