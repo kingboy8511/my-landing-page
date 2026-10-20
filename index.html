@@ -6,70 +6,208 @@
 <meta name="theme-color" content="#081326">
 <title>Angmiraeup | Online Work</title>
 <style>
-:root{color-scheme:dark;--bg:#081326;--panel:#101f37;--line:#263955;--text:#f5f8ff;--muted:#a8b7ce;--cyan:#5eead4;--blue:#2388ff}
+:root{color-scheme:dark;--bg:#081326;--panel:#101f37;--line:#263955;--text:#f5f8ff;--muted:#a8b7ce;--cyan:#5eead4;--blue:#2388ff;--gold:#facc15}
 *{box-sizing:border-box}
 html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
 body{background:radial-gradient(ellipse at 80% 0%,#153b68 0%,#081326 55%)}
-.shell{height:100dvh;min-height:540px;max-width:520px;margin:0 auto;padding:13px 15px 12px;display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden}
-.top{display:flex;align-items:center;justify-content:space-between;min-height:34px}
-.brand{font-size:18px;font-weight:900;letter-spacing:-.6px}.brand span{color:var(--cyan)}
-.status{font-size:10px;font-weight:800;letter-spacing:.9px;color:var(--cyan);border:1px solid #287a76;background:#103b40;padding:6px 9px;border-radius:30px}
-.hero{border:1px solid #294565;border-radius:22px;padding:17px 17px 15px;background:linear-gradient(135deg,#132e50,#10213a 70%);box-shadow:0 12px 35px #0003}
-.kicker{font-size:10px;letter-spacing:1.8px;font-weight:850;color:var(--cyan);text-transform:uppercase}
-h1{font-size:clamp(25px,7vw,34px);line-height:1.04;letter-spacing:-1px;margin:8px 0 7px}
-.sub{font-size:12px;color:#d1def1;margin:0}
-.company{margin-top:10px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#c2d1e7}
-.company strong{color:white}
-.metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.metric{border:1px solid var(--line);border-radius:14px;background:#101f37;padding:10px 11px;min-height:60px}
-.metric .ico{font-size:17px;float:left;margin-right:8px}
-.metric b{display:block;font-size:13px;line-height:1.25}
-.metric small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
-.demoWrap{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:15px;background:#101f37;padding:9px;min-height:0}
-.demoWrap img{width:45%;height:91px;object-fit:cover;object-position:center;border-radius:9px;background:#f4f7fb}
-.demoText{min-width:0}.demoText b{font-size:13px;display:block;margin-bottom:4px}.demoText p{font-size:10px;line-height:1.4;color:var(--muted);margin:0}
-.redirect{border-radius:13px;background:#132b49;border:1px solid #2a4d73;padding:10px 12px;display:flex;align-items:center;gap:10px}
-.spinner{width:22px;height:22px;border:2px solid #355777;border-top-color:var(--cyan);border-radius:50%;animation:spin .8s linear infinite;flex:0 0 auto}
-.redirect b{display:block;font-size:12px}.redirect small{display:block;color:#b5c6de;font-size:10px;margin-top:2px}
-@keyframes spin{to{transform:rotate(360deg)}}
-.footer{font-size:9px;line-height:1.35;color:#8193ad;text-align:center;margin-top:auto;padding:0 3px}
+.shell{height:100dvh;min-height:560px;max-width:500px;margin:0 auto;padding:12px 14px 10px;display:flex;flex-direction:column;gap:8px;position:relative;overflow:hidden}
 
-/* Review Toast Popup Styling */
-.toast{position:fixed;left:50%;bottom:65px;transform:translate(-50%,20px);width:min(calc(100% - 28px),410px);z-index:999999;display:flex;gap:12px;align-items:center;padding:12px 14px;border:1px solid #287a76;border-radius:15px;background:#102540;box-shadow:0 15px 45px rgba(0,0,0,0.6);opacity:0;pointer-events:none;transition:opacity .35s ease,transform .35s ease}
+.top{display:flex;align-items:center;justify-content:space-between;min-height:30px}
+.brand{font-size:18px;font-weight:900;letter-spacing:-.6px}.brand span{color:var(--cyan)}
+.status{font-size:10px;font-weight:800;letter-spacing:.8px;color:var(--cyan);border:1px solid #287a76;background:#103b40;padding:5px 9px;border-radius:30px}
+
+/* Hero Section */
+.hero{border:1px solid #294565;border-radius:18px;padding:12px 14px;background:linear-gradient(135deg,#132e50,#10213a 70%);box-shadow:0 10px 30px #0004}
+.kicker{font-size:9.5px;letter-spacing:1.5px;font-weight:800;color:var(--cyan);text-transform:uppercase}
+
+/* 1 Line Highlighted Title */
+h1{
+  font-size:clamp(16px, 4.8vw, 21px);
+  font-weight:900;
+  line-height:1.2;
+  margin:6px 0;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  background:linear-gradient(90deg, #ffffff, #5eead4);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.sub{font-size:11px;color:#c9d7ec;margin:0;line-height:1.35}
+
+/* Highlighted PAN Card Requirement */
+.id-alert{
+  margin-top:8px;
+  background:rgba(250, 204, 21, 0.12);
+  border:1px dashed #facc15;
+  color:#fef08a;
+  padding:6px 10px;
+  border-radius:10px;
+  font-size:11.5px;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+/* 1 Line Company */
+.company-single{
+  margin-top:7px;
+  font-size:11.5px;
+  color:#a5b8d2;
+  background:rgba(255,255,255,0.04);
+  padding:5px 10px;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,0.08);
+}
+.company-single strong{color:#5eead4;margin-left:4px;letter-spacing:.5px}
+
+/* Metrics Grid */
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.metric{border:1px solid var(--line);border-radius:12px;background:#101f37;padding:8px 10px;min-height:54px}
+.metric .ico{font-size:16px;float:left;margin-right:7px}
+.metric b{display:block;font-size:12px;line-height:1.2}
+.metric small{display:block;color:var(--muted);font-size:9.5px;margin-top:2px}
+
+/* Live Captcha Task Preview Box */
+.demoWrap{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:14px;background:#101f37;padding:8px 10px}
+.captcha-box{
+  width:42%;
+  flex-shrink:0;
+  background:#091427;
+  border:1px solid #284469;
+  border-radius:10px;
+  padding:6px 7px;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+.captcha-img{
+  background:#ffffff;
+  border-radius:6px;
+  padding:4px 0;
+  text-align:center;
+  letter-spacing:5px;
+  font-size:14px;
+  font-weight:900;
+  font-family:'Courier New', monospace;
+  color:#0f172a;
+  text-decoration:line-through;
+  user-select:none;
+}
+.captcha-input-demo{
+  background:#172a47;
+  border:1px solid #355777;
+  border-radius:5px;
+  padding:3px 6px;
+  font-size:10px;
+  color:#5eead4;
+  font-weight:700;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.captcha-input-demo span{color:#10b981;font-size:9px}
+
+.demoText{min-width:0}
+.demoText b{font-size:12px;display:block;margin-bottom:3px;color:#fff}
+.demoText p{font-size:9.5px;line-height:1.35;color:var(--muted);margin:0}
+
+/* Redirect Status */
+.redirect{border-radius:11px;background:#132b49;border:1px solid #2a4d73;padding:8px 11px;display:flex;align-items:center;gap:9px}
+.spinner{width:19px;height:19px;border:2px solid #355777;border-top-color:var(--cyan);border-radius:50%;animation:spin .8s linear infinite;flex:0 0 auto}
+.redirect b{display:block;font-size:11.5px}
+.redirect small{display:block;color:#b5c6de;font-size:9.5px;margin-top:1px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.footer{font-size:8.5px;line-height:1.3;color:#8193ad;text-align:center;margin-top:auto;padding:0 2px}
+
+/* Review Toast Popup (Positioned so it NEVER blocks the button) */
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:130px; /* Telegram button se upar rahega taki overlap na ho */
+  transform:translate(-50%,20px);
+  width:min(calc(100% - 24px),390px);
+  z-index:999999;
+  display:flex;
+  gap:11px;
+  align-items:center;
+  padding:10px 13px;
+  border:1px solid #287a76;
+  border-radius:14px;
+  background:#102540;
+  box-shadow:0 12px 35px rgba(0,0,0,0.7);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .35s ease,transform .35s ease;
+}
 .toast.show{opacity:1;transform:translate(-50%,0)}
-.avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#1c9a92,#229ED9);color:#ffffff;font-size:16px;font-weight:900;flex:0 0 auto}
-.toast b{font-size:13px;display:block;color:#ffffff;line-height:1.2}
-.toast p{font-size:11px;color:#a8c4e4;margin:3px 0 0;line-height:1.3}
-.tag{font-size:8.5px;color:#5eead4;letter-spacing:.8px;text-transform:uppercase;font-weight:900;margin-bottom:2px;display:flex;align-items:center;gap:4px}
-.verified-tick{color:#10b981;font-size:11px}
-@media(max-height:650px){.shell{padding-top:8px;gap:7px}.hero{padding:13px 15px}.demoWrap img{height:74px}.metric{min-height:53px;padding:8px}.footer{font-size:8px}}
+.avatar{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#1c9a92,#229ED9);color:#ffffff;font-size:15px;font-weight:900;flex:0 0 auto}
+.toast b{font-size:12.5px;display:block;color:#ffffff;line-height:1.2}
+.toast p{font-size:10.5px;color:#a8c4e4;margin:2px 0 0;line-height:1.25}
+.tag{font-size:8px;color:#5eead4;letter-spacing:.7px;text-transform:uppercase;font-weight:900;margin-bottom:2px;display:flex;align-items:center;gap:4px}
+.verified-tick{color:#10b981;font-size:10px}
 </style>
 </head>
 <body>
 <main class="shell">
 <header class="top"><div class="brand">Ang<span>miraeup</span></div><div class="status">PROJECT DETAILS</div></header>
+
 <section class="hero">
 <div class="kicker">Mobile-based opportunity</div>
-<h1>Online Typing &amp;<br>Captcha Work</h1>
+
+<!-- Title in One Highlighted Line -->
+<h1>Online Typing &amp; Captcha Work</h1>
+
 <p class="sub">A simple mobile-based project. Connect with the team on Telegram for current work details.</p>
-<div class="company"><span>Company</span><strong>ANGMIRAEUP</strong></div>
+
+<!-- Highlighted Government ID / PAN Card Line -->
+<div class="id-alert">
+  <span>🪪</span>
+  <span><strong>Mandatory:</strong> Must Have Gov ID (PAN Card)</span>
+</div>
+
+<!-- Company Name in Single Line -->
+<div class="company-single">
+  <span>Registered Partner:</span> <strong>ANGMIRAEUP</strong>
+</div>
 </section>
+
 <section class="metrics">
 <div class="metric"><span class="ico">💸</span><b>Daily Payout</b><small>1000-2000/day</small></div>
 <div class="metric"><span class="ico">🎯</span><b>No Target*</b><small>Ask for current task rules</small></div>
 <div class="metric"><span class="ico">📱</span><b>Mobile Based</b><small>Typing &amp; CAPTCHA </small></div>
-<div class="metric"><span class="ico">🛡️</span><b>No Investment*</b><small>Never pay a joining fee</small></div>
+<div class="metric"><span class="ico">🛡️</span><b>No Investment*</b><small>Never pay joining fee</small></div>
 </section>
-<section class="demoWrap">
-<img alt="Typing and CAPTCHA task demonstration" src="data:image/png;base64,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">
-<div class="demoText"><b>Work preview</b><p>Example CAPTCHA entry and typing task. Demo illustration only, not a live assignment or payment proof.</p></div>
-</section>
-<section class="redirect"><div class="spinner"></div><div><b id="redirectTitle">Opening Telegram…</b><small id="redirectDesc">Preparing your “I'm Interested To Join” message</small></div></section>
 
-<div style="text-align:center; padding:10px; position:relative; z-index:99999;">
+<!-- Live Captcha Work Demo (Sharp & Always Visible) -->
+<section class="demoWrap">
+  <div class="captcha-box">
+    <div style="font-size:8px; color:#8ab4f8; font-weight:800; letter-spacing:0.5px;">TASK PREVIEW:</div>
+    <div class="captcha-img">9 X 4 K 2</div>
+    <div class="captcha-input-demo">
+      <span>9X4K2</span>
+      <span>✓ Verified</span>
+    </div>
+  </div>
+  <div class="demoText">
+    <b>Work preview</b>
+    <p>Simple CAPTCHA typing task. Type the exact code shown above and submit directly from your phone.</p>
+  </div>
+</section>
+
+<section class="redirect">
+  <div class="spinner"></div>
+  <div><b id="redirectTitle">Opening Telegram…</b><small id="redirectDesc">Preparing your “I'm Interested To Join” message</small></div>
+</section>
+
+<!-- Telegram Button -->
+<div style="text-align:center; padding:4px 0; position:relative; z-index:99999;">
   <a href="https://t.me/workfortyping?text=I%27m%20Interested%20To%20Join"
      target="_blank"
-     style="display:block; background:#229ED9; color:white; padding:14px; border-radius:12px; font-size:16px; font-weight:bold; text-align:center; text-decoration:none;">
+     style="display:block; background:#229ED9; color:white; padding:13px; border-radius:12px; font-size:15px; font-weight:bold; text-align:center; text-decoration:none; box-shadow:0 6px 20px rgba(34,158,217,0.4);">
     ✈️ Contact on Telegram
   </a>
 </div>
@@ -77,11 +215,11 @@ h1{font-size:clamp(25px,7vw,34px);line-height:1.04;letter-spacing:-1px;margin:8p
 <footer class="footer">*Payout, earnings, availability and task terms must be verified with the team.</footer>
 </main>
 
-<!-- TAMIL NADU & KERALA ACTIVITY TOAST POPUP -->
+<!-- TAMIL NADU & KERALA USER POPUP (Button ko block nahi karega) -->
 <div class="toast" id="toast" role="status" aria-live="polite">
   <div class="avatar" id="avatar">K</div>
   <div>
-    <div class="tag"><span>New Member</span> <span class="verified-tick">✔</span></div>
+    <div class="tag"><span>Live Join</span> <span class="verified-tick">✔</span></div>
     <b id="reviewTitle">Kavitha S just joined</b>
     <p id="reviewBody">From Madurai, Tamil Nadu • 1 min ago</p>
   </div>
@@ -91,7 +229,6 @@ h1{font-size:clamp(25px,7vw,34px);line-height:1.04;letter-spacing:-1px;margin:8p
 (function(){
  const telegram='https://t.me/workfortyping?text=I%27m%20Interested%20To%20Join';
 
- // Tamil Nadu & Kerala Specific Members Data
  const members = [
   { name: 'Kavitha S', city: 'Madurai, Tamil Nadu', letter: 'K' },
   { name: 'Anjali Nair', city: 'Kochi, Kerala', letter: 'A' },
@@ -109,7 +246,7 @@ h1{font-size:clamp(25px,7vw,34px);line-height:1.04;letter-spacing:-1px;margin:8p
  function showEvent(){
   const m = members[idx % members.length];
   idx++;
-  const timeAgo = (Math.floor(Math.random() * 4) + 1) + ' min ago'; // 1 to 4 min ago
+  const timeAgo = (Math.floor(Math.random() * 4) + 1) + ' min ago';
 
   document.getElementById('avatar').textContent = m.letter;
   document.getElementById('reviewTitle').textContent = m.name + ' just joined';
@@ -117,13 +254,12 @@ h1{font-size:clamp(25px,7vw,34px);line-height:1.04;letter-spacing:-1px;margin:8p
   
   const t = document.getElementById('toast');
   t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3200); // 3.2 sec tak dikhega
+  setTimeout(() => t.classList.remove('show'), 3000);
  }
 
- setTimeout(showEvent, 1000); // 1 sec baad pehla popup
- setInterval(showEvent, 5500); // Har 5.5 sec me naya user pop up hoga
+ setTimeout(showEvent, 1000);
+ setInterval(showEvent, 5200);
 
- // Automatic Telegram redirect
  setTimeout(function(){
   document.getElementById('redirectDesc').textContent = 'Redirecting now…';
   window.location.href = telegram;
