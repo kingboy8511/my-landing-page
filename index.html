@@ -75,26 +75,182 @@ h1{font-size:clamp(25px,7vw,34px);line-height:1.04;letter-spacing:-1px;margin:8p
 <script>
 (function(){
  const telegram='https://t.me/workfortyping?text=I%27m%20Interested%20To%20Join';
- const events=[
-  {name:'Kavitha · Madurai',title:'Sample payout notification',body:'Illustration only —  a verified payment .',letter:'K'},
-  {name:'Rejani S',title:'Sample project activity',body:'Example notification —  a verified user activity.',letter:'R'},
-  {name:'Typing project',title:'New activity example',body:'Demo popup only. Please confirm project terms with the team.',letter:'A'}
- ];
- let idx=0;
- function showEvent(){
-  const e=events[idx%events.length];idx++;
-  document.getElementById('avatar').textContent=e.letter;
-  document.getElementById('reviewTitle').textContent=e.title;
-  document.getElementById('reviewBody').textContent=e.name+' · '+e.body;
-  const t=document.getElementById('toast');t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),3000);
- }
- setTimeout(showEvent,900);
- setInterval(showEvent,5200);
- // Attempt the requested direct Telegram handoff after 5 seconds.
- // Some in-app browsers block automatic app launches; in that case the browser may remain on this screen.
- setTimeout(function(){document.getElementById('redirectDesc').textContent='Redirecting now…';window.location.href=telegram;},5000);
-})();
+<!-- ================= SOCIAL PROOF POPUP START ================= -->
+<style>
+  /* Popup Box Container */
+  .social-proof-box {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #ffffff;
+    padding: 12px 18px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    border: 1px solid #f0f0f0;
+    max-width: 320px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    transform: translateY(120%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  /* Jab popup show hoga */
+  .social-proof-box.show {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* User Avatar/Circle Icon */
+  .sp-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* Popup Text Details */
+  .sp-details {
+    flex-grow: 1;
+  }
+
+  .sp-title {
+    margin: 0;
+    font-size: 14px;
+    color: #1f2937;
+    line-height: 1.3;
+  }
+
+  .sp-title strong {
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .sp-subtitle {
+    margin: 3px 0 0;
+    font-size: 12px;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  /* Verified Icon / Dot */
+  .sp-verified {
+    color: #10b981;
+    font-size: 11px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Close Button */
+  .sp-close {
+    cursor: pointer;
+    color: #9ca3af;
+    font-size: 18px;
+    margin-left: 5px;
+    line-height: 1;
+  }
+
+  .sp-close:hover {
+    color: #374151;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 480px) {
+    .social-proof-box {
+      left: 10px;
+      right: 10px;
+      bottom: 15px;
+      max-width: calc(100% - 20px);
+    }
+  }
+</style>
+
+<!-- Popup HTML -->
+<div id="sp-toast" class="social-proof-box">
+  <div id="sp-avatar" class="sp-avatar">K</div>
+  <div class="sp-details">
+    <p class="sp-title">
+      <strong id="sp-name">Kavitha S</strong> just joined
+    </p>
+    <p class="sp-subtitle">
+      <span id="sp-location">Madurai, TN</span> • 
+      <span id="sp-time">1 min ago</span>
+      <span class="sp-verified">✔</span>
+    </p>
+  </div>
+  <span class="sp-close" onclick="hidePopup()">&times;</span>
+</div>
+
+<!-- Popup JavaScript Logic -->
+<script>
+  // Tamil Nadu & Kerala Users Data
+  const proofData = [
+    { name: "Kavitha S", city: "Madurai, Tamil Nadu" },
+    { name: "Anjali Nair", city: "Kochi, Kerala" },
+    { name: "Karthik M", city: "Chennai, Tamil Nadu" },
+    { name: "Vishnu Prasad", city: "Trivandrum, Kerala" },
+    { name: "Priya Raman", city: "Coimbatore, Tamil Nadu" },
+    { name: "Akhil Thomas", city: "Kozhikode, Kerala" },
+    { name: "Vignesh P", city: "Trichy, Tamil Nadu" },
+    { name: "Reshma K", city: "Thrissur, Kerala" },
+    { name: "Divya N", city: "Salem, Tamil Nadu" },
+    { name: "Sreejith R", city: "Kollam, Kerala" }
+  ];
+
+  const toast = document.getElementById("sp-toast");
+  const avatarEl = document.getElementById("sp-avatar");
+  const nameEl = document.getElementById("sp-name");
+  const locEl = document.getElementById("sp-location");
+  const timeEl = document.getElementById("sp-time");
+
+  let popupTimeout;
+
+  function showNextNotification() {
+    // Random user select karna
+    const randomUser = proofData[Math.floor(Math.random() * proofData.length)];
+    const randomMinutes = Math.floor(Math.random() * 8) + 1; // 1 to 8 minutes ago
+
+    // Data update karna
+    avatarEl.innerText = randomUser.name.charAt(0);
+    nameEl.innerText = randomUser.name;
+    locEl.innerText = randomUser.city;
+    timeEl.innerText = randomMinutes + " min ago";
+
+    // Show popup
+    toast.classList.add("show");
+
+    // 4 second baad hide ho jayega
+    popupTimeout = setTimeout(() => {
+      hidePopup();
+      // Agla popup 5 se 8 second ke baad dubara aayega
+      setTimeout(showNextNotification, Math.floor(Math.random() * 3000) + 5000);
+    }, 4000);
+  }
+
+  function hidePopup() {
+    toast.classList.remove("show");
+  }
+
+  // Page load hone ke 3 second baad start hoga
+  window.addEventListener("DOMContentLoaded", () => {
+    setTimeout(showNextNotification, 3000);
+  });
+<!-- ================= SOCIAL PROOF POPUP END ================= -->
+  
 </script>
 
 </body>
